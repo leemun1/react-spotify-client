@@ -1,39 +1,9 @@
 import React, { Component } from "react";
 import queryString from "query-string";
 
-const Header = () => (
-  <header>
-    <h1>This is my playlist!</h1>
-  </header>
-);
-
-const Search = ({ handleFilterChange }) => (
-  <section className="search">
-    <p>Here is a search bar</p>
-    <input type="text" onKeyUp={handleFilterChange} />
-  </section>
-);
-
-const Categories = ({ categories = [], handleFilterChange }) => (
-  <section className="categories">
-    <Search handleFilterChange={handleFilterChange} />
-    <p>Here are the categories</p>
-    <ul className="categories__grid">
-      {categories.map(category => (
-        <li key={category.id} className="categories__grid__item">
-          <img src={category.icons[0].url} alt="category" />
-          {category.name}
-        </li>
-      ))}
-    </ul>
-  </section>
-);
-
-const Footer = () => (
-  <footer>
-    <p>This is my footer</p>
-  </footer>
-);
+import Header from "./Header";
+import Categories from "./Categories";
+import Footer from "./Footer";
 
 class App extends Component {
   constructor() {
@@ -57,18 +27,7 @@ class App extends Component {
       return;
     }
 
-    // // get user info and store in state
-    // fetch("https://api.spotify.com/v1/me", requestHeader)
-    //   .then(response => response.json())
-    //   .then(data =>
-    //     this.setState({
-    //       user: {
-    //         name: data.display_name
-    //       }
-    //     })
-    //   );
-
-    // get genres
+    // get categories from spotify API
     fetch(
       "https://api.spotify.com/v1/browse/categories?limit=50",
       requestHeader
@@ -80,18 +39,9 @@ class App extends Component {
           categories: data.categories.items.slice(1)
         });
       });
-
-    // get recommended songs based on genres
-    // fetch(
-    //   "https://api.spotify.com/v1/recommendations?seed_genres=acoustic,alternative,ambient",
-    //   requestHeader
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log("songs", data));
   }
 
   handleFilterChange = event => {
-    console.log(event.target.value);
     this.setState({
       filter: event.target.value
     });
