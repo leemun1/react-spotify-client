@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import queryString from "query-string";
+import { connect } from "react-redux";
 
 import Header from "./Header";
 import Categories from "./Categories";
 import Footer from "./Footer";
+import { startGetCategories } from "../actions/category";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      accessToken: "",
-      user: {},
-      categories: [],
-      filter: ""
-    };
-  }
+  state = {
+    accessToken: "",
+    user: {},
+    categories: this.props.categories,
+    filter: ""
+  };
 
   componentDidMount() {
     let parsed = queryString.parse(window.location.search);
@@ -30,18 +29,17 @@ class App extends Component {
       return;
     }
 
-    // get categories from spotify API
-    fetch(
-      "https://api.spotify.com/v1/browse/categories?limit=50",
-      requestHeader
-    )
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState({
-          categories: data.categories.items.slice(1)
-        });
-      });
+    this.props.getCategories(requestHeader);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { categories, getCategories } = this.props;
+    const newCategories = nextProps.categories;
+
+    // re-render if new note item added
+    if (newCategories.length !== categories.length) {
+      getCategories();
+    }
   }
 
   handleFilterChange = event => {
@@ -51,7 +49,7 @@ class App extends Component {
   };
 
   render() {
-    const categoriesToShow = this.state.categories.filter(category =>
+    const categoriesToShow = this.props.categories.filter(category =>
       category.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
     return categoriesToShow ? (
@@ -69,4 +67,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ categories }) => ({
+  categories
+});
+
+const mapDispatchToProps = dispatch => ({
+  getCategories: requestHeader => dispatch(startGetCategories(requestHeader))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
