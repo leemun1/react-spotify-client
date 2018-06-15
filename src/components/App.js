@@ -1,48 +1,46 @@
 import React, { Component } from "react";
-import queryString from "query-string";
 import { connect } from "react-redux";
+import queryString from "query-string";
 
 import Header from "./Header";
 import Categories from "./Categories";
 import Footer from "./Footer";
+import { startGetAccessToken } from "../actions/auth";
 import { startGetCategories } from "../actions/category";
 
 class App extends Component {
   state = {
     accessToken: "",
-    user: {},
-    categories: this.props.categories,
+    categories: [],
     filter: ""
   };
 
   componentDidMount() {
-    let parsed = queryString.parse(window.location.search);
-    let accessToken = parsed.access_token;
-
-    this.setState({ accessToken });
-
-    const requestHeader = {
-      headers: { Authorization: "Bearer " + accessToken }
-    };
-
-    if (!accessToken) {
-      return;
-    }
-
-    this.props.getCategories(requestHeader);
+    this.props.getAccessToken();
+    this.props.getCategories(this.constructRequestHeader());
   }
 
   componentWillReceiveProps(nextProps) {
-    const { categories, getCategories } = this.props;
+    const { accessToken, categories, getCategories } = this.props;
+
     const newCategories = nextProps.categories;
 
-    // re-render if new category item added
     if (newCategories.length !== categories.length) {
       getCategories();
     }
 
-    this.setState({ categories });
+    this.setState({
+      accessToken,
+      categories
+    });
   }
+
+  constructRequestHeader = () => {
+    let parsed = queryString.parse(window.location.search);
+    let accessToken = parsed.access_token;
+
+    return { headers: { Authorization: "Bearer " + accessToken } };
+  };
 
   handleFilterChange = event => {
     this.setState({
@@ -56,8 +54,7 @@ class App extends Component {
     );
     return categoriesToShow ? (
       <div className="App">
-        <Header />
-        <button onClick={() => console.log(this.state)}>check state</button>
+        <Header accessToken={this.state.accessToken} />
         <Categories
           categories={categoriesToShow}
           handleFilterChange={this.handleFilterChange}
@@ -70,11 +67,13 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ categories }) => ({
+const mapStateToProps = ({ accessToken, categories }) => ({
+  accessToken,
   categories
 });
 
 const mapDispatchToProps = dispatch => ({
+  getAccessToken: () => dispatch(startGetAccessToken()),
   getCategories: requestHeader => dispatch(startGetCategories(requestHeader))
 });
 

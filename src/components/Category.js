@@ -1,29 +1,74 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { startGetPlaylists } from "../actions/playlist";
+
 class Category extends Component {
-  findMatchedCategory = (categories, id) => {
+  state = {
+    category: {},
+    playlists: []
+  };
+
+  componentDidMount() {
+    this.handleGetPlaylists();
+    let category = this.findMatchedCategory();
+    this.setState({ category });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let { playlists } = this.props;
+    const newPlaylists = nextProps.playlists;
+
+    if (playlists.length === 0) {
+      this.handleGetPlaylists();
+    } else if (newPlaylists[0].id !== playlists[0].id) {
+      this.handleGetPlaylists();
+    }
+
+    this.setState({ playlists });
+  }
+
+  handleGetPlaylists = () => {
+    let { accessToken, getPlaylists } = this.props;
+    let category = this.findMatchedCategory();
+    let requestHeader = {
+      headers: { Authorization: "Bearer " + accessToken }
+    };
+    getPlaylists(requestHeader, category.id);
+  };
+
+  findMatchedCategory = () => {
+    let { categories } = this.props;
+    let id = this.props.match.params.id;
     return categories.find(category => category.id === id);
   };
 
   render() {
-    let categories = this.props.categories;
-    let id = this.props.match.params.id;
-    const category = this.findMatchedCategory(categories, id);
-
+    const { category, playlists } = this.state;
     return (
       <div>
         <h1>Playlists for {category.name}</h1>
+        {playlists.map(playlist => (
+          <li key={playlist.id}>
+            <img src={playlist.images[0].url} alt="playlist" />
+            {playlist.name}
+          </li>
+        ))}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ categories }) => ({
-  categories
+const mapStateToProps = ({ accessToken, categories, playlists }) => ({
+  accessToken,
+  categories,
+  playlists
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  getPlaylists: (requestHeader, category) =>
+    dispatch(startGetPlaylists(requestHeader, category))
+});
 
 export default connect(
   mapStateToProps,

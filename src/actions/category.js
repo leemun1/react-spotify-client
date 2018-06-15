@@ -1,6 +1,6 @@
 import { GET_CATEGORIES } from "../constants";
 
-// Fetch Notes
+// Fetch Categories
 export const getCategories = categories => ({
   type: GET_CATEGORIES,
   categories
