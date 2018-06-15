@@ -11,7 +11,7 @@ export default ({ categories, handleFilterChange }) => (
         <Link to={`/category/${category.id}`} key={category.id}>
           <li className="categories__grid__item">
             <img src={category.icons[0].url} alt="category" />
-            {category.name}
+            <span>{category.name}</span>
           </li>
         </Link>
       ))}

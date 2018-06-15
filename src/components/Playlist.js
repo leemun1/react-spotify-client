@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 class Playlist extends Component {
   state = {
     playlist: {},
+    image: {},
     tracks: []
   };
   componentDidMount() {
@@ -21,23 +22,54 @@ class Playlist extends Component {
       .then(response => response.json())
       .then(playlist => {
         this.setState({
-          playlist,
-          tracks: playlist.tracks.items
+          playlist
         });
+      });
+
+    fetch(
+      `https://api.spotify.com/v1/users/spotify/playlists/${id}/images`,
+      requestHeader
+    )
+      .then(response => response.json())
+      .then(images => {
+        this.setState({
+          image: images[0]
+        });
+      });
+
+    fetch(
+      `https://api.spotify.com/v1/users/spotify/playlists/${id}/tracks`,
+      requestHeader
+    )
+      .then(response => response.json())
+      .then(tracks => {
+        this.setState({ tracks: tracks.items });
       });
   }
 
   render() {
     if (this.state.playlist) {
       return (
-        <div>
-          <h1>This is a playlist</h1>
-          {this.state.playlist.name}
-          <ul>
-            {this.state.tracks.map(trackObj => (
-              <li key={trackObj.track.id}>{trackObj.track.name}</li>
-            ))}
-          </ul>
+        <div className="App">
+          <img src={this.state.image.url} alt="playlist" />
+          <h1> {this.state.playlist.name}</h1>
+          <div>{this.state.playlist.description}</div>
+          <table>
+            <thead>
+              <th>Title</th>
+              <th>Artist</th>
+            </thead>
+
+            <tbody>
+              {this.state.tracks.map(trackObj => (
+                <tr key={trackObj.track.id}>
+                  <td>{trackObj.track.name}</td>
+                  <td>{trackObj.track.artists[0].name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <ul />
         </div>
       );
     } else {

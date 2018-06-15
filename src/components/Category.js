@@ -58,20 +58,21 @@ class Category extends Component {
       playlist.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
     return (
-      <div>
+      <div className="App">
         <h1>Playlists for {category.name}</h1>
         <Search handleFilterChange={this.handleFilterChange} />
-        {playlistsToShow.map(playlist => (
-          <Link
-            to={`/category/${category.id}/${playlist.id}`}
-            key={playlist.id}
-          >
-            <li>
-              <img src={playlist.images[0].url} alt="playlist" />
-              {playlist.name}
-            </li>
-          </Link>
-        ))}
+        <ul className="playlists__grid">
+          {playlistsToShow.map(playlist => (
+            <Link
+              to={`/category/${category.id}/${playlist.id}`}
+              key={playlist.id}
+            >
+              <li className="playlists__grid__item">
+                <img src={playlist.images[0].url} alt="playlist" />
+              </li>
+            </Link>
+          ))}
+        </ul>
       </div>
     );
   }
