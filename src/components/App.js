@@ -36,10 +36,12 @@ class App extends Component {
     const { categories, getCategories } = this.props;
     const newCategories = nextProps.categories;
 
-    // re-render if new note item added
+    // re-render if new category item added
     if (newCategories.length !== categories.length) {
       getCategories();
     }
+
+    this.setState({ categories });
   }
 
   handleFilterChange = event => {
@@ -49,12 +51,13 @@ class App extends Component {
   };
 
   render() {
-    const categoriesToShow = this.props.categories.filter(category =>
+    const categoriesToShow = this.state.categories.filter(category =>
       category.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
     return categoriesToShow ? (
       <div className="App">
         <Header />
+        <button onClick={() => console.log(this.state)}>check state</button>
         <Categories
           categories={categoriesToShow}
           handleFilterChange={this.handleFilterChange}
