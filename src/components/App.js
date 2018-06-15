@@ -9,6 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      accessToken: "",
       user: {},
       categories: [],
       filter: ""
@@ -18,6 +19,8 @@ class App extends Component {
   componentDidMount() {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
+
+    this.setState({ accessToken });
 
     const requestHeader = {
       headers: { Authorization: "Bearer " + accessToken }
@@ -51,7 +54,7 @@ class App extends Component {
     const categoriesToShow = this.state.categories.filter(category =>
       category.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
-    return this.state.categories ? (
+    return categoriesToShow ? (
       <div className="App">
         <Header />
         <Categories
