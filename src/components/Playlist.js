@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 class Playlist extends Component {
   state = {
@@ -58,15 +59,24 @@ class Playlist extends Component {
             <thead>
               <th>Title</th>
               <th>Artist</th>
+              <th>Album</th>
+              <th>Duration</th>
             </thead>
 
             <tbody>
-              {this.state.tracks.map(trackObj => (
-                <tr key={trackObj.track.id}>
-                  <td>{trackObj.track.name}</td>
-                  <td>{trackObj.track.artists[0].name}</td>
-                </tr>
-              ))}
+              {this.state.tracks.map(trackObj => {
+                console.log(trackObj);
+                return (
+                  <tr key={trackObj.track.id}>
+                    <td>{trackObj.track.name}</td>
+                    <td>{trackObj.track.artists[0].name}</td>
+                    <td>{trackObj.track.album.name}</td>
+                    <td>
+                      {moment(trackObj.track.duration_ms).format("mm:ss")}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <ul />
