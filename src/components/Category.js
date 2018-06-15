@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Search from "./Search";
 import { startGetPlaylists } from "../actions/playlist";
@@ -61,10 +62,15 @@ class Category extends Component {
         <h1>Playlists for {category.name}</h1>
         <Search handleFilterChange={this.handleFilterChange} />
         {playlistsToShow.map(playlist => (
-          <li key={playlist.id}>
-            <img src={playlist.images[0].url} alt="playlist" />
-            {playlist.name}
-          </li>
+          <Link
+            to={`/category/${category.id}/${playlist.id}`}
+            key={playlist.id}
+          >
+            <li>
+              <img src={playlist.images[0].url} alt="playlist" />
+              {playlist.name}
+            </li>
+          </Link>
         ))}
       </div>
     );
