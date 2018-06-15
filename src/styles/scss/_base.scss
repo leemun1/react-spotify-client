@@ -9,7 +9,6 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
-  overflow: hidden;
 }
 
 body {
@@ -26,4 +25,25 @@ body {
 * > a {
   text-decoration: none;
   color: inherit;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  font-size: 2rem;
+  border: 1px solid blue;
+  width: 100rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header,
+section,
+footer {
+  border: 1px dashed darkmagenta;
+  width: 100%;
 }

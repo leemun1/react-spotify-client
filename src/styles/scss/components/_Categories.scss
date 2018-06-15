@@ -1,0 +1,11 @@
+.categories {
+}
+
+.categories__grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    border: 1px dashed orange;
+  }
+}
