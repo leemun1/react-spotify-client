@@ -1,8 +1,10 @@
 import React from "react";
 
+import Icon from "./Icon";
+
 export default ({ handleFilterChange }) => (
   <div className="search">
-    <span>Filter: </span>
-    <input type="text" onKeyUp={handleFilterChange} />
+    <input type="text" onKeyUp={handleFilterChange} placeholder="Filter" />
+    <Icon name="search" />
   </div>
 );
