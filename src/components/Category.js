@@ -18,6 +18,8 @@ class Category extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     this.handleGetPlaylists();
     let category = this.findMatchedCategory();
     this.setState({ category });
@@ -72,7 +74,7 @@ class Category extends Component {
             <strong>{category.name}</strong>
           </h3>
           <h3 className="playlists__subtitle">
-            Select a playlist below to check out the tracks!
+            Select a playlist from below to check out its tracks!
           </h3>
           <div className="playlists__control">
             <span className="playlists__control--name">{category.name}</span>

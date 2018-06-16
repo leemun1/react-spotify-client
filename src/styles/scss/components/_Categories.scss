@@ -18,6 +18,18 @@
     font-weight: 300;
     line-height: 1.2;
   }
+
+  &__control {
+    @include list__control;
+
+    &--name {
+      @include list__name;
+    }
+
+    &--length {
+      @include list__length;
+    }
+  }
 }
 
 .categories__grid {

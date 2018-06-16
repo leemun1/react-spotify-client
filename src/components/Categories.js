@@ -9,9 +9,15 @@ export default ({ categories, handleFilterChange }) => (
     <h1 className="categories__title">Step 1: Genres & Moods</h1>
     <h3 className="categories__subtitle">How are you feeling today? </h3>
     <h3 className="categories__subtitle">
-      Select a card to check out related playlists.
+      Select a card from below to check out associated playlists.
     </h3>
-    <Search handleFilterChange={handleFilterChange} />
+    <div className="categories__control">
+      <span className="categories__control--name">Genres & Moods</span>
+      <span className="categories__control--length">
+        Showing <strong>{categories.length}</strong> categories
+      </span>
+      <Search handleFilterChange={handleFilterChange} />
+    </div>
     <ul className="categories__grid">
       {categories.length !== 0 ? (
         categories.map(category => (

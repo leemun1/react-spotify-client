@@ -20,25 +20,14 @@
   }
 
   &__control {
-    margin-top: 6rem;
-    margin-bottom: 2rem;
-    padding: 3rem 0;
-    display: flex;
-    justify-content: space-between;
-    border-top: 3px solid rgba(233, 233, 233, 0.432);
+    @include list__control;
 
     &--name {
-      font-family: inherit;
-      line-height: 1;
-      font-size: 3rem;
-      border-bottom: 1px solid #444;
+      @include list__name;
     }
 
     &--length {
-      margin-left: auto;
-      font-family: inherit;
-      font-size: 2.3rem;
-      margin-right: 2rem;
+      @include list__length;
     }
   }
 }

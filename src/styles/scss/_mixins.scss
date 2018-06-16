@@ -1,0 +1,24 @@
+@mixin list__control {
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 3px solid rgba(233, 233, 233, 0.432);
+}
+
+@mixin list__name {
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1;
+  font-size: 3rem;
+  border-bottom: 3px solid #444;
+}
+
+@mixin list__length {
+  margin-left: auto;
+  font-family: inherit;
+  font-size: 2.3rem;
+  margin-right: 2rem;
+}
