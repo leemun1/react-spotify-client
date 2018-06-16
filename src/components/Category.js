@@ -65,20 +65,35 @@ class Category extends Component {
     return (
       <div className="App">
         <Header accessToken={this.props.accessToken} />
-        <h1>Playlists for {category.name}</h1>
-        <Search handleFilterChange={this.handleFilterChange} />
-        <ul className="playlists__grid">
-          {playlistsToShow.map(playlist => (
-            <Link
-              to={`/category/${category.id}/${playlist.id}`}
-              key={playlist.id}
-            >
-              <li className="playlists__grid__item">
-                <img src={playlist.images[0].url} alt="playlist" />
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <section className="playlists">
+          <h1 className="playlists__title">Step 2: Pick a Playlist</h1>
+          <h3 className="playlists__subtitle">
+            Here are the associated playlists for :{" "}
+            <strong>{category.name}</strong>
+          </h3>
+          <h3 className="playlists__subtitle">
+            Select a playlist below to check out the tracks!
+          </h3>
+          <div className="playlists__control">
+            <span className="playlists__control--name">{category.name}</span>
+            <span className="playlists__control--length">
+              Showing <strong>{playlistsToShow.length}</strong> playlists
+            </span>
+            <Search handleFilterChange={this.handleFilterChange} />
+          </div>
+          <ul className="playlists__grid">
+            {playlistsToShow.map(playlist => (
+              <Link
+                to={`/category/${category.id}/${playlist.id}`}
+                key={playlist.id}
+              >
+                <li className="playlists__grid__item">
+                  <img src={playlist.images[0].url} alt="playlist" />
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </section>
         <Footer />
       </div>
     );

@@ -3,20 +3,18 @@
   display: flex;
   align-items: center;
   position: relative;
-  margin: 2rem 0;
 
   input {
     background-color: transparent;
     font-size: 2rem;
     font-family: inherit;
-    width: 50rem;
-    height: 5rem;
+    width: 30rem;
+    height: 4rem;
     color: #666;
     border: 1.5px solid rgba(194, 194, 194, 0.678);
     border-radius: 5px;
     outline: none;
     padding-left: 1rem;
-    margin: 2rem 0;
     transition: all 0.2s;
 
     &::placeholder {

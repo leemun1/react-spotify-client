@@ -12,7 +12,6 @@ export const startGetPlaylists = (requestHeader, id) => {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         const playlists = data.playlists.items;
         dispatch(getPlaylists(playlists));
       });

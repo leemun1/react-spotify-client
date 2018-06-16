@@ -5,7 +5,7 @@
   padding: 1rem 2rem;
   margin: 2rem auto;
   color: #444;
-  max-width: 140rem;
+  max-width: 110rem;
 
   &__title {
     font-family: "Kadwa", serif;
@@ -22,8 +22,9 @@
 
 .categories__grid {
   justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 25rem);
+  grid-gap: 2rem;
 
   &__item {
     display: flex;
@@ -31,7 +32,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    margin: 1rem;
     color: $color-white;
 
     img {
