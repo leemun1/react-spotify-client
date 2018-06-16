@@ -8,9 +8,15 @@ export default ({ accessToken }) => (
         pathname: "/app",
         search: `?access_token=${accessToken}`
       }}
+      className="header__brand"
     >
-      <h1 className="header__title">Spotify Clone</h1>
-      <h3 className="header__subtitle">Find out about your musical taste </h3>
+      <span>SoundHunt</span>
+    </Link>
+    <Link to="/about" className="header__about">
+      <span>About</span>
+    </Link>
+    <Link to="/contact" className="header__contact">
+      <span>Contact</span>
     </Link>
   </header>
 );

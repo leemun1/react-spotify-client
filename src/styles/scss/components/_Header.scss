@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  height: 5rem;
+  background-color: rgba(255, 255, 255, 0.712);
+  align-items: center;
+  padding: 0 2rem;
+
+  &__brand {
+    font-family: "Kadwa", serif;
+    font-size: 3rem;
+  }
+
+  &__about {
+    margin-left: auto;
+  }
+
+  &__about,
+  &__contact {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-right: 2rem;
+    border-bottom: 1.5px solid transparent;
+    transition: all 0.2s;
+
+    &:hover {
+      border-color: #333;
+    }
+  }
+}

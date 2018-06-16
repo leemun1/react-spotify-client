@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 
+import Header from "./Header";
+import Footer from "./Footer";
+
 class Playlist extends Component {
   state = {
     playlist: {},
@@ -52,34 +55,46 @@ class Playlist extends Component {
     if (this.state.playlist) {
       return (
         <div className="App">
-          <img src={this.state.image.url} alt="playlist" />
-          <h1> {this.state.playlist.name}</h1>
-          <div>{this.state.playlist.description}</div>
-          <table>
-            <thead>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Album</th>
-              <th>Duration</th>
-            </thead>
+          <Header accessToken={this.props.accessToken} />
+          <div className="playlist">
+            <div className="playlist__info">
+              <img
+                src={this.state.image.url}
+                alt="playlist"
+                className="playlist__info__img"
+              />
+              <div className="playlist__info__desc">
+                <h1> {this.state.playlist.name}</h1>
+                <div>{this.state.playlist.description}</div>
+              </div>
+            </div>
+            <div className="playlist__tracks">
+              <table>
+                <thead>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th>Album</th>
+                  <th>Duration</th>
+                </thead>
 
-            <tbody>
-              {this.state.tracks.map(trackObj => {
-                console.log(trackObj);
-                return (
-                  <tr key={trackObj.track.id}>
-                    <td>{trackObj.track.name}</td>
-                    <td>{trackObj.track.artists[0].name}</td>
-                    <td>{trackObj.track.album.name}</td>
-                    <td>
-                      {moment(trackObj.track.duration_ms).format("mm:ss")}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <ul />
+                <tbody>
+                  {this.state.tracks.map(trackObj => {
+                    return (
+                      <tr key={trackObj.track.id}>
+                        <td>{trackObj.track.name}</td>
+                        <td>{trackObj.track.artists[0].name}</td>
+                        <td>{trackObj.track.album.name}</td>
+                        <td>
+                          {moment(trackObj.track.duration_ms).format("mm:ss")}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <Footer />
         </div>
       );
     } else {

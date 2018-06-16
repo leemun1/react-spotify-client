@@ -54,7 +54,7 @@ class App extends Component {
     );
     return categoriesToShow ? (
       <div className="App">
-        <Header accessToken={this.state.accessToken} />
+        <Header accessToken={this.props.accessToken} />
         <Categories
           categories={categoriesToShow}
           handleFilterChange={this.handleFilterChange}

@@ -12,10 +12,14 @@ html {
 }
 
 body {
-  background-color: rgba(228, 228, 228, 0.692);
+  color: #333;
+  background: transparent;
   font-family: $font-main;
   font-weight: 300;
   line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 * > li {
@@ -28,16 +32,12 @@ body {
 }
 
 #root {
-  display: flex;
-  justify-content: center;
+  min-width: 100%;
 }
-
 .App {
-  font-size: 2rem;
-  width: 120rem;
+  background: linear-gradient(135deg, #f3e7e8 0%, #e3eeff 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 header,

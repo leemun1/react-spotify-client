@@ -1,0 +1,13 @@
+.search {
+  align-self: flex-start;
+  input {
+    background-color: transparent;
+    font-size: 2rem;
+    width: 30rem;
+    height: 4rem;
+    border: 1.5px solid #999;
+    border-radius: 100px;
+    outline: none;
+    padding-left: 1rem;
+  }
+}

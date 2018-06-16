@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+// Components
+import Header from "./Header";
 import Search from "./Search";
+import Footer from "./Footer";
+
+// Redux
 import { startGetPlaylists } from "../actions/playlist";
 
 class Category extends Component {
@@ -59,6 +64,7 @@ class Category extends Component {
     );
     return (
       <div className="App">
+        <Header accessToken={this.props.accessToken} />
         <h1>Playlists for {category.name}</h1>
         <Search handleFilterChange={this.handleFilterChange} />
         <ul className="playlists__grid">
@@ -73,6 +79,7 @@ class Category extends Component {
             </Link>
           ))}
         </ul>
+        <Footer />
       </div>
     );
   }

@@ -1,0 +1,53 @@
+.login {
+  background: linear-gradient(135deg, #f3e7e8 0%, #e3eeff 100%);
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #555;
+
+  &__logo {
+    width: 17rem;
+  }
+  &__brand {
+    font-family: "Kadwa";
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 1rem 0;
+  }
+  &__desc {
+    width: 50rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  &__button {
+    color: #555;
+    font-size: 2rem;
+    font-family: inherit;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: rgba(144, 238, 194, 0.753);
+    width: 20rem;
+    height: 5rem;
+    margin: 2rem 0;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: darken(rgb(144, 238, 194), 5%);
+    }
+  }
+  &__link-to-spotify {
+    font-size: 1.5rem;
+    a {
+      text-decoration: underline;
+    }
+    span {
+      margin: 0 0.2rem;
+    }
+  }
+}
