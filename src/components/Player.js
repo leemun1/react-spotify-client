@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 
 export default class Player extends Component {
-  state = {
-    play: false
+  state = { play: false };
+
+  componentDidMount() {
+    this.setState({ play: false });
+    this.audio.addEventListener("pause", this.listenForPause);
+  }
+
+  listenForPause = () => {
+    console.log("track paused");
+    this.setState({ play: false });
   };
 
   play = () => {
@@ -14,10 +22,6 @@ export default class Player extends Component {
       this.setState({ play: true });
     }
   };
-
-  componentWillReceiveProps() {
-    this.setState({ play: true });
-  }
 
   render() {
     return (
@@ -31,7 +35,7 @@ export default class Player extends Component {
             {!this.state.play ? (
               <i className="far fa-play-circle" />
             ) : (
-              <i class="fas fa-pause-circle" />
+              <i className="fas fa-pause-circle" />
             )}
           </span>
         </button>

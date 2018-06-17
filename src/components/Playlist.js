@@ -32,7 +32,6 @@ class Playlist extends Component {
         }
       }
     ],
-    currentTrack: "",
     error: null
   };
   componentDidMount() {
@@ -99,7 +98,7 @@ class Playlist extends Component {
   }
 
   audioPauser = e => {
-    console.log("listening for play!");
+    console.log("playing new track!");
     var audios = document.getElementsByTagName("audio");
     for (var i = 0, len = audios.length; i < len; i++) {
       if (audios[i] !== e.target) {
@@ -117,8 +116,6 @@ class Playlist extends Component {
   }
 
   render() {
-    //TODO: add feature to play 30sec preview
-
     const { playlist, image, tracks, error } = this.state;
     const { accessToken, history } = this.props;
     // coerce desc to be string to be passed into Parser()
