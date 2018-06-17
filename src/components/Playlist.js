@@ -5,6 +5,7 @@ import Parser from "html-react-parser";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import Player from "./Player";
 
 class Playlist extends Component {
   state = {
@@ -34,6 +35,8 @@ class Playlist extends Component {
     error: null
   };
   componentDidMount() {
+    this.listenForPlay();
+
     let { accessToken } = this.props;
 
     // if no accessToken, redirect to login page
@@ -94,36 +97,50 @@ class Playlist extends Component {
       });
   }
 
+  listenForPlay = () => {
+    document.addEventListener(
+      "play",
+      function(e) {
+        console.log("listening!");
+        var audios = document.getElementsByTagName("audio");
+        for (var i = 0, len = audios.length; i < len; i++) {
+          if (audios[i] !== e.target) {
+            audios[i].pause();
+          }
+        }
+      },
+      true
+    );
+  };
   render() {
     //TODO: add feature to play 30sec preview
+
+    const { playlist, image, tracks, error } = this.state;
+    const { accessToken, history } = this.props;
     // coerce desc to be string to be passed into Parser()
-    let desc = String(this.state.playlist.description);
-    console.log(this.state);
+    let desc = String(playlist.description);
 
     // if error during API calls, redirect to login page
-    if (this.state.error) {
-      this.props.history.push("/");
+    if (error) {
+      history.push("/");
     }
 
     return (
       <div className="App">
-        <Header accessToken={this.props.accessToken} />
+        <Header accessToken={accessToken} />
         <div className="playlist">
           <div className="playlist__info">
-            <img
-              src={this.state.image}
-              alt="playlist"
-              className="playlist__info__img"
-            />
+            <img src={image} alt="playlist" className="playlist__info__img" />
             <div className="playlist__info__desc">
               <span>PLAYLIST</span>
-              <span> {this.state.playlist.name}</span>
+              <span> {playlist.name}</span>
               <span>{Parser(desc)}</span>
             </div>
           </div>
           <table className="playlist__tracks">
             <thead>
               <tr className="playlist__tracks--head">
+                <th />
                 <th>Title</th>
                 <th>Artist</th>
                 <th>Album</th>
@@ -131,20 +148,21 @@ class Playlist extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.tracks.map(trackObj => {
+              {tracks.map(obj => {
                 return (
-                  <tr key={trackObj.track.id} className="playlist__track">
-                    <td className="playlist__track--title">
-                      {trackObj.track.name}
+                  <tr key={obj.track.id} className="playlist__track">
+                    <td>
+                      <Player audio={obj.track.preview_url} />
                     </td>
+                    <td className="playlist__track--title">{obj.track.name}</td>
                     <td className="playlist__track--artist">
-                      {trackObj.track.artists[0].name}
+                      {obj.track.artists[0].name}
                     </td>
                     <td className="playlist__track--album">
-                      {trackObj.track.album.name}
+                      {obj.track.album.name}
                     </td>
                     <td className="playlist__track--duration">
-                      {moment(trackObj.track.duration_ms).format("mm:ss")}
+                      {moment(obj.track.duration_ms).format("mm:ss")}
                     </td>
                   </tr>
                 );
