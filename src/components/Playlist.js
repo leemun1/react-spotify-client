@@ -32,6 +32,7 @@ class Playlist extends Component {
         }
       }
     ],
+    currentTrack: "",
     error: null
   };
   componentDidMount() {
@@ -97,21 +98,24 @@ class Playlist extends Component {
       });
   }
 
-  listenForPlay = () => {
-    document.addEventListener(
-      "play",
-      function(e) {
-        console.log("listening!");
-        var audios = document.getElementsByTagName("audio");
-        for (var i = 0, len = audios.length; i < len; i++) {
-          if (audios[i] !== e.target) {
-            audios[i].pause();
-          }
-        }
-      },
-      true
-    );
+  audioPauser = e => {
+    console.log("listening for play!");
+    var audios = document.getElementsByTagName("audio");
+    for (var i = 0, len = audios.length; i < len; i++) {
+      if (audios[i] !== e.target) {
+        audios[i].pause();
+      }
+    }
   };
+
+  listenForPlay = () => {
+    document.addEventListener("play", this.audioPauser, true);
+  };
+
+  componentWillUnmount() {
+    document.removeEventListener("play", this.audioPauser);
+  }
+
   render() {
     //TODO: add feature to play 30sec preview
 
@@ -140,7 +144,7 @@ class Playlist extends Component {
           <table className="playlist__tracks">
             <thead>
               <tr className="playlist__tracks--head">
-                <th />
+                <th>{""}</th>
                 <th>Title</th>
                 <th>Artist</th>
                 <th>Album</th>
@@ -151,7 +155,7 @@ class Playlist extends Component {
               {tracks.map(obj => {
                 return (
                   <tr key={obj.track.id} className="playlist__track">
-                    <td>
+                    <td className="playlist__track--play">
                       <Player audio={obj.track.preview_url} />
                     </td>
                     <td className="playlist__track--title">{obj.track.name}</td>

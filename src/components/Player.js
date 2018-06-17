@@ -2,17 +2,16 @@ import React, { Component } from "react";
 
 export default class Player extends Component {
   state = {
-    play: false,
-    currentTrack: ""
+    play: false
   };
 
   play = () => {
     if (this.state.play) {
-      this.setState({ play: false });
       this.audio.pause();
+      this.setState({ play: false });
     } else {
-      this.setState({ play: true });
       this.audio.play();
+      this.setState({ play: true });
     }
   };
 
@@ -21,24 +20,28 @@ export default class Player extends Component {
   }
 
   render() {
-    if (this.props.audio !== null) {
-      return (
-        <div>
-          <button onClick={this.play}>Play/pause</button>
-          <audio
-            src={this.props.audio}
-            ref={audio => {
-              this.audio = audio;
-            }}
-          />;
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <button disabled>No preview</button>
-        </div>
-      );
-    }
+    return (
+      <div className="player">
+        <button
+          className="player__button"
+          onClick={this.play}
+          disabled={this.props.audio === null && true}
+        >
+          <span>
+            {!this.state.play ? (
+              <i className="far fa-play-circle" />
+            ) : (
+              <i class="fas fa-pause-circle" />
+            )}
+          </span>
+        </button>
+        <audio
+          src={this.props.audio}
+          ref={audio => {
+            this.audio = audio;
+          }}
+        />
+      </div>
+    );
   }
 }

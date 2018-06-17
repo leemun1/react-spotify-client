@@ -1,0 +1,25 @@
+.player {
+  max-width: 5rem;
+
+  &__button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #555;
+
+    span {
+      align-self: center;
+      font-size: 1.8rem;
+    }
+
+    &:disabled {
+      cursor: default;
+      span {
+        color: lightgray;
+      }
+    }
+  }
+}

@@ -55,10 +55,10 @@
       text-transform: uppercase;
 
       th:nth-child(1) {
-        // label for title
-        padding-left: 2rem;
+        // label for button
+        padding-left: 3rem;
       }
-      th:nth-child(4) {
+      th:nth-child(5) {
         // label for duration
         padding-right: 2rem;
       }
@@ -86,8 +86,11 @@
       white-space: nowrap;
     }
 
+    &--play {
+      padding: 0 2rem;
+    }
+
     &--title {
-      padding-left: 2rem;
       max-width: 30rem;
     }
     &--artist {
