@@ -6,21 +6,30 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Search from "./Search";
 import Footer from "./Footer";
+import Empty from "./Empty";
 
 // Redux
 import { startGetPlaylists } from "../actions/playlist";
 
 class Category extends Component {
-  //TODO: set up default state appropriately to prevent undefined error
   state = {
-    category: {},
-    playlists: [],
+    category: { id: "", name: "" },
+    playlists: [
+      {
+        id: "",
+        name: "",
+        images: [
+          {
+            url: ""
+          }
+        ]
+      }
+    ],
     filter: ""
   };
 
   componentDidMount() {
     window.scrollTo(0, 0);
-
     this.handleGetPlaylists();
     let category = this.findMatchedCategory();
     this.setState({ category });
@@ -45,7 +54,7 @@ class Category extends Component {
     let requestHeader = {
       headers: { Authorization: "Bearer " + accessToken }
     };
-    getPlaylists(requestHeader, category.id);
+    category && getPlaylists(requestHeader, category.id);
   };
 
   findMatchedCategory = () => {
@@ -85,16 +94,20 @@ class Category extends Component {
             <Search handleFilterChange={this.handleFilterChange} />
           </div>
           <ul className="playlists__grid">
-            {playlistsToShow.map(playlist => (
-              <Link
-                to={`/category/${category.id}/${playlist.id}`}
-                key={playlist.id}
-              >
-                <li className="playlists__grid__item">
-                  <img src={playlist.images[0].url} alt="playlist" />
-                </li>
-              </Link>
-            ))}
+            {playlistsToShow.length !== 0 ? (
+              playlistsToShow.map(playlist => (
+                <Link
+                  to={`/category/${category.id}/${playlist.id}`}
+                  key={playlist.id}
+                >
+                  <li className="playlists__grid__item">
+                    <img src={playlist.images[0].url} alt="playlist" />
+                  </li>
+                </Link>
+              ))
+            ) : (
+              <Empty />
+            )}
           </ul>
         </section>
         <Footer />
