@@ -1,28 +1,47 @@
-.login {
+.about {
   background: linear-gradient(135deg, #f3e7e8 0%, #e3eeff 100%);
   min-height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   color: #555;
 
+  &__container {
+    margin: 0 auto;
+    width: 55rem;
+  }
+
   &__logo {
-    width: 17rem;
+    width: 10rem;
+  }
+  &__title {
+    color: rgba(136, 136, 136, 0.699);
+    align-self: flex-start;
+    font-size: 4rem;
+    margin: 1rem 0;
   }
   &__brand {
     font-family: "Megrim", cursive;
-    font-size: 4rem;
     font-weight: bold;
-    margin: 1rem 0;
+    color: #555;
+    transition: all 0.2s;
+
+    &:hover {
+      border-bottom: 2.5px solid currentColor;
+    }
   }
+
   &__desc {
-    width: 50rem;
-    text-align: center;
+    text-align: left;
     font-size: 2rem;
     font-weight: 400;
   }
+
+  a {
+    align-self: flex-end;
+  }
+
   &__button {
     color: #555;
     font-size: 2rem;
@@ -31,7 +50,7 @@
     border: none;
     border-radius: 5px;
     background: rgba(144, 238, 194, 0.753);
-    width: 20rem;
+    width: 12rem;
     height: 5rem;
     margin: 2rem 0;
     cursor: pointer;

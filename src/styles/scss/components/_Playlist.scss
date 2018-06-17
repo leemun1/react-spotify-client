@@ -9,6 +9,7 @@
 
   &__info {
     display: flex;
+
     &__img {
       width: 25rem;
       height: 25rem;
@@ -21,19 +22,19 @@
 
       span:nth-child(1) {
         // playlist label
-        font-size: 1.8rem;
-        font-weight: 400;
+        font-size: 2rem;
+        font-weight: 700;
       }
       span:nth-child(2) {
         // playlist name
-        font-size: 4.5rem;
+        font-size: 5rem;
         font-weight: 700;
         line-height: 1;
       }
       span:nth-child(3) {
         // playlist description
         margin-top: 1rem;
-        font-size: 1.8rem;
+        font-size: 2rem;
         a {
           text-decoration: underline;
         }
@@ -48,9 +49,10 @@
     align-self: stretch;
 
     &--head {
-      color: #666;
-      border-bottom: 1.5px solid rgba(233, 233, 233, 0.432);
-      font-size: 1.5rem;
+      color: #555;
+      border-bottom: 1px solid rgba(197, 197, 197, 0.623);
+      font-size: 1.8rem;
+      font-weight: bold;
       text-align: left;
       text-transform: uppercase;
 
@@ -80,7 +82,7 @@
       margin: 1rem 0;
       padding: 0.5rem 0;
       padding-right: 3rem;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

@@ -71,7 +71,7 @@ class Category extends Component {
         <section className="playlists">
           <h1 className="playlists__title">Step 2: Pick a Playlist</h1>
           <h3 className="playlists__subtitle">
-            Here are the associated playlists for :{" "}
+            Here are the associated playlists for:{" "}
             <strong>{category.name}</strong>
           </h3>
           <h3 className="playlists__subtitle">

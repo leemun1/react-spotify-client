@@ -12,14 +12,20 @@ export default ({ accessToken }) => (
         className="header__brand"
       >
         <img src="/logo.png" alt="logo" />
-        <span>SoundHunt</span>
+        <span>Melon</span>
       </Link>
       <Link to="/about" className="header__about">
         <span>About</span>
       </Link>
-      <Link to="/contact" className="header__contact">
+      <a
+        href="https://github.com/leemun1/react-spotify-client"
+        className="header__contact"
+      >
+        <span>Source</span>
+      </a>
+      {/* <Link to="/contact" className="header__contact">
         <span>Contact</span>
-      </Link>
+      </Link> */}
     </div>
   </header>
 );
