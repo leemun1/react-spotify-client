@@ -62,6 +62,7 @@ class App extends Component {
           categories={categoriesToShow}
           handleFilterChange={this.handleFilterChange}
         />
+        <Footer />
       </div>
     ) : (
       <div>Loading...</div>
