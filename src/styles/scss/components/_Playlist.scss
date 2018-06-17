@@ -1,3 +1,106 @@
 .playlist {
-  min-width: 100%;
+  display: flex;
+  min-height: 90vh;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  margin: 2rem auto;
+  color: #444;
+  max-width: 110rem;
+
+  &__info {
+    display: flex;
+    &__img {
+      width: 25rem;
+      height: 25rem;
+      border-radius: 5px;
+    }
+    &__desc {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3rem;
+
+      span:nth-child(1) {
+        // playlist label
+        font-size: 1.8rem;
+        font-weight: 400;
+      }
+      span:nth-child(2) {
+        // playlist name
+        font-size: 4.5rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+      span:nth-child(3) {
+        // playlist description
+        margin-top: 1rem;
+        font-size: 1.8rem;
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &__tracks {
+    border-collapse: collapse;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    align-self: stretch;
+
+    &--head {
+      color: #666;
+      border-bottom: 1.5px solid rgba(233, 233, 233, 0.432);
+      font-size: 1.5rem;
+      text-align: left;
+      text-transform: uppercase;
+
+      th:nth-child(1) {
+        // label for title
+        padding-left: 2rem;
+      }
+      th:nth-child(4) {
+        // label for duration
+        padding-right: 2rem;
+      }
+    }
+  }
+
+  &__track {
+    border-bottom: 1.5px solid rgba(233, 233, 233, 0.432);
+    padding: 0 2rem;
+    transition: all 0.2s;
+    &:hover {
+      background-color: rgba(233, 233, 233, 0.432);
+    }
+
+    &--title,
+    &--artist,
+    &--album,
+    &--duration {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+      padding-right: 3rem;
+      font-size: 1.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &--title {
+      padding-left: 2rem;
+      max-width: 30rem;
+    }
+    &--artist {
+      max-width: 30rem;
+    }
+    &--album {
+      max-width: 40rem;
+    }
+
+    &--duration {
+      text-align: right;
+      max-width: 10rem;
+      padding-right: 2rem;
+    }
+  }
 }

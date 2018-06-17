@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import { startGetPlaylists } from "../actions/playlist";
 
 class Category extends Component {
+  //TODO: set up default state appropriately to prevent undefined error
   state = {
     category: {},
     playlists: [],

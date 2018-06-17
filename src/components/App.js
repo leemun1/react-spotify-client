@@ -9,6 +9,8 @@ import { startGetAccessToken } from "../actions/auth";
 import { startGetCategories } from "../actions/category";
 
 class App extends Component {
+  //TODO: set up default state appropriately to prevent undefined error
+
   state = {
     accessToken: "",
     categories: [],
