@@ -1,4 +1,4 @@
-# Melon
+# Melon (a.k.a. react-spotify-client)
 #### Can't decide on what to listen to? Melon makes it easy to find the right music for the right moments.
 
 This project was created as an adaptation of the app created in the [React Tutorial](https://www.youtube.com/playlist?list=PLqGj3iMvMa4LFqyGab_aR7M0zfQm2KTuX) of the DevTips Channel. The application retrieves data from the Spotify Web API. The React front-end is integrated with a simple Express server, the code for which could be found [here](https://github.com/leemun1/react-spotify-server) 
